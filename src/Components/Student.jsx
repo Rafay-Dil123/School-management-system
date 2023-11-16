@@ -5,7 +5,8 @@ function Student() {
   return (
     <div>
 
-     <Attendance/>
+     {/* <Attendance/> */}
+     
     </div>
   )
 }

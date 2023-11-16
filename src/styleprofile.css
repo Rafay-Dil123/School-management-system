@@ -1,0 +1,22 @@
+
+.main-body {
+    padding: 20px;
+ }
+ 
+ .student-info {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+ }
+ 
+ .student-info h2 {
+    color: #3498db;
+    margin-bottom: 10px;
+ }
+ 
+ .text {
+    color: #2c3e50;
+ }
+ 
