@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../style.css';
 import Student from './Student';
+import preloader from './preloaderr';
 export default function Home() {
     const [registration,setregistration] = useState(false);
     const [name,setname]=useState("");
@@ -16,9 +17,14 @@ export default function Home() {
    
 <>
    {registration?(
+      
+      <>
+      {/* <preloader/> */}
    <Student />
+    </>
         ):(
         <div>
+         
 <div className="sidenav">
          <div className="login-main-text">
             <h2>Student Application<br/> Login Page</h2>
