@@ -3,6 +3,7 @@ import Attendance from './Attendance'
 import Profile from './Profile'
 import TimeTable from './TimeTable'
 import Marks from './Marks'
+import FeeGeneration from './FeeGeneration'
 function Student() {
   return (
     <div>
@@ -10,7 +11,8 @@ function Student() {
      {/* <Attendance/> */}
      {/* <TimeTable /> */}
       {/* <Profile/>  */}
-      <Marks/>
+      {/* <Marks/> */}
+      <FeeGeneration/>
     </div>
   )
 }
