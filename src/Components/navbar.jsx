@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../stylenavbar.css";
+import Notifications from "./Notifications";
 
 function Navbar() {
   const [isLight, setIsLight] = useState(false);
@@ -15,6 +16,7 @@ function Navbar() {
       </div>
       <div className="navigation">
         <ul>
+          <Notifications />
           <a
             href="http://www.sashatran.com/"
             className="active"
