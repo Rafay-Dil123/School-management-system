@@ -1,12 +1,16 @@
 import React from 'react'
 import Attendance from './Attendance'
 import Profile from './Profile'
+import TimeTable from './TimeTable'
+import Marks from './Marks'
 function Student() {
   return (
     <div>
 
      {/* <Attendance/> */}
-     <Profile/>
+     {/* <TimeTable /> */}
+      {/* <Profile/>  */}
+      <Marks/>
     </div>
   )
 }
