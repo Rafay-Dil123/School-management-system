@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../stylenavbar.css";
 import Notifications from "./Notifications";
+import { Link } from "react-router-dom";
 
 function Navbar() {
   const [isLight, setIsLight] = useState(false);
@@ -16,26 +17,14 @@ function Navbar() {
       </div>
       <div className="navigation">
         <ul>
+          <Link to="/profile" className="active">
+            Profile
+          </Link>
+          <Link to="/attendance">Attendance</Link>
+          <Link to="/marks">Marks</Link>
+          <Link to="/feegeneration">Fee</Link>
+          <Link to="/timetable">TimeTable</Link>
           <Notifications />
-          <a
-            href="http://www.sashatran.com/"
-            className="active"
-            target="_blank"
-          >
-            Home
-          </a>
-          <a href="https://codepen.io/sashatran/" target="_blank">
-            Attendance
-          </a>
-          <a href="https://instagram.com/sasha.codes/" target="_blank">
-            Marks
-          </a>
-          <a href="https://twitter.com/sa_sha26" target="_blank">
-            Fee
-          </a>
-          <a href="https://twitter.com/sa_sha26" target="_blank">
-            TimeTable
-          </a>
         </ul>
       </div>
     </div>

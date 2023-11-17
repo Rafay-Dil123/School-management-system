@@ -67,9 +67,9 @@ function Notifications() {
             {/* <Button onClick={handleOpen}><Badge badgeContent={getRows == '0' ? "0" : getRows }  color="warning"> <NotificationsIcon /> </Badge> </Button> */}
             <MenuItem onClick={handleOpen}>
               <IconButton
-                size="large"
+                size="small"
                 aria-label="show 17 new notifications"
-                color="inherit"
+                color="black"
               >
                 <Badge
                   badgeContent={getRows == "0" ? "0" : getRows}
