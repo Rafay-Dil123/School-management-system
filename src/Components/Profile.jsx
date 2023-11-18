@@ -1,6 +1,7 @@
 import React from 'react'
 import '../styleprofile.css';
 import Navbar from './navbar';
+import { motion } from 'framer-motion';
 
 function Profile() {
     const studentData = {
@@ -27,13 +28,23 @@ function Profile() {
            <Navbar />
   
            <div id="page-body">
-            {/* student acaedmic */}
               <section className="home-section">
-                 {/* <div className="text" style={{ fontWeight: 'bolder' }}>
-                    <i className="bx bx-home"></i>&nbsp;Student Home Page
-                 </div> */}
-  
-                 <div className="main-body">
+                
+                  <motion.div style={{
+        height:"20vh",
+       }}
+       animate={
+        {
+          translateY:"20px"
+        }
+       }
+       transition={{
+        duration:0.5,
+        repeat:Infinity,
+        repeatType:'reverse',
+       }}
+       >
+          <div className="main-body">
                     <div className="student-info">
                        <h2>Acaedmic Information</h2>
                        <div>
@@ -53,6 +64,9 @@ function Profile() {
                        </div>
                     </div>
                  </div>
+       
+       </motion.div>
+               
               </section>
 
                {/* academy info */}
