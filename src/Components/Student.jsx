@@ -11,9 +11,9 @@ function Student() {
       {/* <Attendance/> */}
       {/* <TimeTable /> */}
       {/* <Profile /> */}
-      <CourseRegistration />
       {/* <Marks /> */}
       {/* <FeeGeneration/> */}
+      <CourseRegistration />
     </div>
   );
 }
