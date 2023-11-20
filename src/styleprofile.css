@@ -17,8 +17,8 @@
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Adjust the width of the section */
-    max-width: 1000px; /* Set a maximum width for better readability */
+    width: 100%;
+  max-width: 1200px;
   }
   
   /* Student information styling */

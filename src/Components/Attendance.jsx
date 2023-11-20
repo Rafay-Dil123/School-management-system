@@ -1,57 +1,87 @@
-import React from 'react';
-import { useState } from 'react';
-// import '/styles/style.css';
+import React, { useState } from 'react';
 import Navbar from './navbar';
- import '../styleattendance.css';
- function Attendance() {
+import '../styleattendance.css';
 
-    const [selectedSection, setSelectedSection] = useState('courseA'); // Default section
-  
-    const handleSectionChange = (event) => {
-      setSelectedSection(event.target.value);
-      // Add logic to fetch and display attendance data for the selected section
-    };
-  
+function Attendance() {
+  const [selectedCourse, setSelectedCourse] = useState('courseA'); // Default course
+
+  // Define attendance data for a student in different courses
+  const studentAttendance = {
+    'John Doe': {
+      courseA: [
+        { date: '2023-01-01', status: 'P' },
+        { date: '2023-01-02', status: 'A' },
+        { date: '2023-01-03', status: 'P' },
+        // Add more attendance data for courseA as needed
+      ],
+      courseB: [
+        { date: '2023-01-01', status: 'P' },
+        { date: '2023-01-02', status: 'P' },
+        { date: '2023-01-03', status: 'A' },
+        // Add more attendance data for courseB as needed
+      ],
+      // Add more courses as needed
+    },
+    // Add more students as needed
+  };
+
+  const handleCourseChange = (event) => {
+    setSelectedCourse(event.target.value);
+  };
+
+  const getAttendanceTable = () => {
+    // For simplicity, using a default student ('John Doe') in this example
+    const studentData = studentAttendance['John Doe'];
+
+    if (!studentData || !studentData[selectedCourse]) {
+      return <p>No attendance data available for the selected course.</p>;
+    }
+
+    // Display attendance table for the default student and selected course
+    const attendanceList = studentData[selectedCourse];
+
     return (
-   
-      <div>
-         <Navbar/>
-        <div className="attendance-container">
-          <h2>Student Attendance</h2>
-          <div className="section-selector">
-            <label htmlFor="section">Select course:</label>
-            <select id="section" name="section" value={selectedSection} onChange={handleSectionChange}>
-              <option value="courseA">course A</option>
-              <option value="courseB">course B</option>
-              {/* Add more sections as needed */}
-            </select>
-          </div>
-  
-          {/* Display attendance for the selected section */}
-          <div className="attendance-table">
-            {/* Add attendance table based on the selectedSection */}
-            <p>Attendance table for {selectedSection}</p>
-            {<table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Date</th>
-              <th>Status</th>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {attendanceList.map((attendance, index) => (
+            <tr key={index}>
+              <td>{attendance.date}</td>
+              <td>{attendance.status}</td>
             </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>2023-01-01</td>
-              <td>P</td>
-            </tr>
-            {/* Add more attendance data as needed */}
-          </tbody>
-        </table>}
-          </div>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
+
+  return (
+    <div className="ccc">
+      <Navbar />
+      <div className="attendance-container">
+        <h2>Student Attendance</h2>
+
+        <div className="course-selector">
+          <label htmlFor="course">Select course:</label>
+          <select id="course" name="course" value={selectedCourse} onChange={handleCourseChange}>
+            <option value="courseA">course A</option>
+            <option value="courseB">course B</option>
+            {/* Add more courses as needed */}
+          </select>
+        </div>
+
+        {/* Display attendance for the default student and selected course */}
+        <div className="attendance-table">
+          {getAttendanceTable()}
         </div>
       </div>
-    );
-  }
-  
-  export default Attendance;
+    </div>
+  );
+}
+
+export default Attendance;

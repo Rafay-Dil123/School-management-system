@@ -54,11 +54,15 @@
   .navigation {
     display: flex;
     justify-content: space-evenly;
+    width: 100%;
   }
   
   ul {
     display: flex;
     list-style-type: none;
+      margin: 0;
+      padding: 0;
+    
   }
   
   ul a {
@@ -95,4 +99,9 @@
   ul .active:hover:before {
     opacity: 0;
   }
-  
+
+@media (min-width: 1200px){
+.container {
+    max-width: 1756px;
+}
+}
