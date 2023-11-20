@@ -4,6 +4,21 @@ import Profile from "./Profile";
 import TimeTable from "./TimeTable";
 import Marks from "./Marks";
 import FeeGeneration from "./FeeGeneration";
+
+import CourseRegistration from "./CourseRegistration";
+
+function Student() {
+  return (
+    <div>
+    
+      {/* <Attendance/> */}
+      {/* <TimeTable /> */}
+      {/* <Profile /> */}
+      {/* <Marks /> */}
+      {/* <FeeGeneration/> */}
+      {/* <CourseRegistration /> */}
+
+    </div>
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function Student() {
@@ -18,6 +33,7 @@ function Student() {
           <Route path="/feegeneration" element={<FeeGeneration />} />
         </Routes>
       </Router>
+
   );
 }
 
