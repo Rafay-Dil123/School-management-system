@@ -13,7 +13,7 @@ function Student() {
       {/* <Profile /> */}
       {/* <Marks /> */}
       {/* <FeeGeneration/> */}
-      <CourseRegistration />
+      {/* <CourseRegistration /> */}
     </div>
   );
 }
