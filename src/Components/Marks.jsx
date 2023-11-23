@@ -52,7 +52,7 @@ function Marks() {
 
   return (
     <>
-      <Navbar />
+
 
       <div className="marks-container">
         <table>

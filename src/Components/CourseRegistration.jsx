@@ -44,7 +44,7 @@ const CourseRegistration = () => {
 
   return (
     <>
-      <Navbar />
+   
       <div className="container mt-4">
         <h2>Course Registration</h2>
         {registrationMessage && (

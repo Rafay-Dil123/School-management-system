@@ -10,7 +10,6 @@ const TimeTable = () => {
   };
   return (
     <>
-      <Navbar />
       <div class="container1">
         <div class="table-responsive">
           <table class="table table-bordered text-center">

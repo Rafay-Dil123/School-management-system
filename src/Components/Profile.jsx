@@ -25,7 +25,6 @@ function Profile() {
   
      return (
         <div className='pageon'>
-           <Navbar />
   
            <div id="page-body">
               <section className="home-section">
