@@ -24,6 +24,7 @@ function Navbar() {
           <Link to="/marks">Marks</Link>
           <Link to="/feegeneration">Fee</Link>
           <Link to="/timetable">TimeTable</Link>
+          <Link to="/cg">Course Registration</Link>
           <Notifications />
         </ul>
       </div>

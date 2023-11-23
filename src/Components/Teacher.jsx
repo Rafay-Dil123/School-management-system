@@ -1,3 +1,6 @@
+import Listitems2 from './Listitems2'
+import Teachermarks from './Teachermarks';
+import Teacherattendance from './Teacherattendance';
 import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -11,21 +14,13 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "./listitems";
-import Profile from "./Profile";
-import Marks from "./Marks";
-import TimeTable from "./TimeTable";
-import FeeGeneration from "./FeeGeneration";
+import { mainListItems2, secondaryListItems2 } from './Listitems2';
 import { Route, Router, Routes } from "react-router-dom";
 import { Navigate } from "react-router-dom";
-import Attendance from "./Attendance";
-import CourseRegistration from "./CourseRegistration";
 
 function Copyright(props) {
   return (
@@ -93,7 +88,7 @@ const Drawer = styled(MuiDrawer, {
 
 const defaultTheme = createTheme();
 
-export default function Student() {
+export default function Teacher() {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -128,7 +123,7 @@ export default function Student() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Student Dashboard
+             Teacher Dashboard
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -152,9 +147,9 @@ export default function Student() {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            {mainListItems2}
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            {secondaryListItems2}
           </List>
         </Drawer>
         <Box
@@ -172,16 +167,9 @@ export default function Student() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Routes>
-              <Route path="/profile" element={<Profile />} />
-              <Route path="/fee-payment" element={<FeeGeneration />} />
-              <Route
-                path="course-registeration"
-                element={<CourseRegistration />}
-              />
-              <Route path="/attendance" element={<Attendance />} />
-              <Route path="/marks" element={<Marks />} />
-              <Route path="/time-table" element={<TimeTable />} />
-              <Route path="/" element={<Navigate to="/profile" />} />
+
+            <Route path="marks" element={<Teachermarks/>} />
+            <Route path="attendance" element={<Teacherattendance/>} />
             </Routes>
             
             {/* Add more routes for other pages */}
@@ -193,3 +181,12 @@ export default function Student() {
     </ThemeProvider>
   );
 }
+
+// function Teacher() {
+//   return (
+//     <Routes>
+//    <Route path="/" element={<Teachermarks/>} />
+//    </Routes>
+   
+//   )
+// }

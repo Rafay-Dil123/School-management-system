@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import "../style.css";
-import Student from "./Student";
-import preloader from "./preloaderr";
-import TimeTable from "./TimeTable";
-import Appjs from "../App.js"
-export default function Home() {
+import Teacher from "./Teacher";
+
+
+export default function TeacherLogin() {
   const [registration, setregistration] = useState(false);
   const [name, setname] = useState("");
   const [password, setpassword] = useState("");
@@ -19,16 +18,14 @@ export default function Home() {
     <>
       {registration ? (
         <>
-          {/* <preloader/> */}
-           <Student/>
-        
+          <Teacher/>
         </>
       ) : (
         <div>
           <div className="sidenav">
             <div className="login-main-text">
               <h2>
-                Student Application
+                Teacher Application
                 <br /> Login Page
               </h2>
               <p>Login or register from here to access.</p>
