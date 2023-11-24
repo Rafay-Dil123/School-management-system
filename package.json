@@ -1,5 +1,6 @@
 {
   "name": "sms",
+  "proxy":"http://127.0.0.1:8000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,6 +10,7 @@
     "@mui/icons-material": "^5.14.18",
     "@mui/material": "^5.14.18",
     "@mui/styled-engine": "^5.14.18",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.6",
     "@mui/system": "^5.14.18",
     "@react-pdf/renderer": "^3.1.14",
     "@testing-library/jest-dom": "^5.17.0",
@@ -21,6 +23,7 @@
     "react-pdf": "^7.5.1",
     "react-router-dom": "^6.19.0",
     "react-scripts": "5.0.1",
+    "styled-components": "^6.1.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

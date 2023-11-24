@@ -1,22 +1,36 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import '../styleprofile.css';
 import Navbar from './navbar';
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
-function Profile() {
-    const studentData = {
-        name: 'John Doe',
-        rollNumber: '123456',
-        department: 'Computer Science',
-        batch: '2023',
-        email: 'john.doe@example.com',
-        group:'B+',
-        dob:'23/7/2003',
-        cnic:"3520128929876",
-        nationality:'Pakistani',
-        MobileNo:'03865627389',
+function Profile({rollnumber}) {
+           let [studentData,setstudentData]=useState([]);
+          useEffect(()=>{
+             
+             getstudentinfo();
+          },[])
+         
+          let getstudentinfo=async ()=>{
+            let data=await fetch(`/api/studentsdata/${rollnumber}/`);
+           let d=await data.json();
+           console.log(d);
+            setstudentData(d);
+          }
 
-     };
+   //  const studentData = {
+   //      name: 'John Doe',
+   //      rollNumber: '123456',
+   //      department: 'Computer Science',
+   //      batch: '2023',
+   //      email: 'john.doe@example.com',
+   //      group:'B+',
+   //      dob:'23/7/2003',
+   //      cnic:"3520128929876",
+   //      nationality:'Pakistani',
+   //      MobileNo:'03865627389',
+
+   //   };
 
      const Academy= {
         Name: 'Kips',
@@ -25,7 +39,6 @@ function Profile() {
   
      return (
         <div className='pageon'>
-           <Navbar />
   
            <div id="page-body">
               <section className="home-section">

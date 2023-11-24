@@ -1,7 +1,7 @@
 import React from "react";
 import "../styletimetable.css";
 import Navbar from "./navbar";
-
+// hthis is a time table
 const TimeTable = () => {
   const lecture_detail = {
     title: "Dance",
@@ -10,7 +10,6 @@ const TimeTable = () => {
   };
   return (
     <>
-      <Navbar />
       <div class="container1">
         <div class="table-responsive">
           <table class="table table-bordered text-center">

@@ -71,7 +71,6 @@ const FeeGeneration = () => {
 
   return (
     <>
-      <Navbar />
 
       <div className="fee-generation-container">
         <h2>Fee Generation</h2>

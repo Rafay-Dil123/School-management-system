@@ -62,7 +62,7 @@ function Attendance() {
 
   return (
     <div className="ccc">
-      <Navbar />
+    
       <div className="attendance-container">
         <h2>Student Attendance</h2>
 
