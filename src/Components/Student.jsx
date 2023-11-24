@@ -93,7 +93,7 @@ const Drawer = styled(MuiDrawer, {
 
 const defaultTheme = createTheme();
 
-export default function Student() {
+export default function Student({rollnumber}) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
@@ -172,7 +172,7 @@ export default function Student() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Routes>
-              <Route path="/profile" element={<Profile />} />
+              <Route path="/profile" element={<Profile rollnumber={rollnumber}/>} />
               <Route path="/fee-payment" element={<FeeGeneration />} />
               <Route
                 path="course-registeration"
