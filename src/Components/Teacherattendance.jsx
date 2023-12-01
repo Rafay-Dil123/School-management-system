@@ -1,23 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "../stylemarks.css";
 
-const studentData = {
-  sectionA: [
-    { rollNo: '01', name: 'Ali', attendance: '', date: '' },
-    { rollNo: '02', name: 'Salman', attendance: '', date: '' },
-    // Add more students for sectionA as needed
-  ],
-  sectionB: [
-    { rollNo: '03', name: 'Shan', attendance: '', date: '' },
-    { rollNo: '04', name: 'Aliyan', attendance: '', date: '' },
-    // Add more students for sectionB as needed
-  ],
-  sectionC: [
-    { rollNo: '05', name: 'Zeeshan', attendance: '', date: '' },
-    // Add more students for sectionC as needed
-  ],
-};
-
 function getCurrentDate() {
   const today = new Date();
   const dd = String(today.getDate()).padStart(2, '0');
@@ -27,31 +10,92 @@ function getCurrentDate() {
 }
 
 function Teacherattendance() {
-  const [selectedSection, setSelectedSection] = useState('sectionA');
+  const [studentData, setStudentData] = useState([]);
+  const [selectedSection, setSelectedSection] = useState('SectionA');
+  const [attendanceData, setAttendanceData] = useState({});  
   const [message, setMessage] = useState('');
+  const [date, setdate] = useState(null);
 
   useEffect(() => {
     setMessage('');
+    getInitialData(selectedSection);
   }, [selectedSection]);
+
+  const getInitialData = async (section) => {
+    setSelectedSection(section);
+    setdate(getCurrentDate);
+    try {
+      const response = await fetch(`/api/studentsattendancedata/${section}`);
+      const data = await response.json();
+      setStudentData(data);
+      console.log(data)
+      // Initialize attendance data with default values
+      const initialAttendanceData = {};
+      data.forEach((student) => {
+        initialAttendanceData[student.rollno] = { attendance: '', date: getCurrentDate() };
+      });
+      setAttendanceData(initialAttendanceData);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
   const handleSectionChange = (section) => {
     setSelectedSection(section);
   };
 
-  const handleAttendanceChange = (index, value) => {
-    const updatedStudentData = [...studentData[selectedSection]];
-    updatedStudentData[index].attendance = value;
-    updatedStudentData[index].date = getCurrentDate();
-    studentData[selectedSection] = updatedStudentData;
-    setSelectedSection(selectedSection);
-    setMessage(`Attendance marked for ${updatedStudentData[index].name} on ${getCurrentDate()}`);
+  const handleAttendanceChange = (rollNo, value) => {
+    const updatedAttendanceData = { ...attendanceData };
+
+    if (updatedAttendanceData[rollNo]) {
+      updatedAttendanceData[rollNo].attendance = value;
+      for (const student of studentData) {
+        if(student.rollno===rollNo){
+          student.attendance=value;
+        }
+      }
+
+      setMessage(`Attendance marked for ${rollNo} on ${getCurrentDate()}`);
+      setAttendanceData(updatedAttendanceData);
+      console.log("Updated",updatedAttendanceData)
+      console.log(studentData)
+    } else {
+      console.error(`Attendance data for ${rollNo} not found.`);
+    }
   };
 
-  const handleSave = () => {
-    // Add logic to save attendance data (e.g., send to a server)
-    console.log(`Attendance data for ${selectedSection} saved:`, studentData[selectedSection]);
+  const handleSave = async () => {
+    let flag=true;
+    studentData.forEach((student) => {
+      if(attendanceData[student.rollno].attendance==''){
+           alert("First mark attendance for all students");
+           flag=false;
+      }
+    });
+
+    if(flag){
+    console.log(`Attendance data for ${selectedSection} saved:`, attendanceData);
+    let count=0;
+    for (const student of studentData) {
+      student.date = date;
+      student.attendance=attendanceData[student.rollno].attendance
+      const response = await fetch(`/api/updatestudentattendance/${selectedSection}/${student.rollno[0]}/${date}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(student),
+      });
+      if (!response.ok) {
+        console.error(`Failed to save attendance for student ${student.rollno[0]}:`, response.statusText);
+        alert(`Failed to save attendance for student ${student.rollno[0]}. Please try again.`);
+        return; // Stop the loop on the first failure
+      }
+    }
+    
+    
     alert('Attendance saved successfully!');
-  };
+  }};
 
   return (
     <>
@@ -63,9 +107,9 @@ function Teacherattendance() {
             value={selectedSection}
             onChange={(e) => handleSectionChange(e.target.value)}
           >
-            <option value="sectionA">Section A</option>
-            <option value="sectionB">Section B</option>
-            <option value="sectionC">Section C</option>
+            <option value="SectionA">Section A</option>
+            <option value="SectionB">Section B</option>
+            <option value="SectionC">Section C</option>
           </select>
         </div>
         <div className="attendance-container">
@@ -73,30 +117,29 @@ function Teacherattendance() {
             <thead>
               <tr>
                 <th>Roll No.</th>
-                <th>Name</th>
                 <th>Attendance</th>
               </tr>
             </thead>
             <tbody>
-              {studentData[selectedSection].map((student, index) => (
-                <tr key={student.rollNo}>
-                  <td>{student.rollNo}</td>
-                  <td>{student.name}</td>
-                  <td>
-                    <select
-                      value={student.attendance}
-                      onChange={(e) => handleAttendanceChange(index, e.target.value)}
-                    >
-                      <option value="">--Select--</option>
-                      <option value="present">Present</option>
-                      <option value="absent">Absent</option>
-                    </select>
-                    {student.attendance && (
-                      <span className="message">{message}</span>
-                    )}
-                  </td>
-                </tr>
-              ))}
+            {studentData.map((student) => (
+  <tr key={student.rollno[0]}>
+    <td>{student.rollno[0]}</td>
+    <td>
+    <select
+  value={attendanceData[student.rollno[0]]?.attendance || ''}
+  onChange={(e) => handleAttendanceChange(student.rollno[0], e.target.value)}
+>
+  <option value="">--Select--</option>
+  <option value="present">Present</option>
+  <option value="absent">Absent</option>
+</select>
+{attendanceData[student.rollno[0]]?.attendance && (
+  <span className="message">{message}</span>
+)}
+
+    </td>
+  </tr>
+))}
             </tbody>
           </table>
         </div>

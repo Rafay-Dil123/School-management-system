@@ -173,13 +173,13 @@ export default function Student({rollnumber}) {
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Routes>
               <Route path="/profile" element={<Profile rollnumber={rollnumber}/>} />
-              <Route path="/fee-payment" element={<FeeGeneration />} />
+              <Route path="/fee-payment" element={<FeeGeneration rollnumber={rollnumber}/>} />
               <Route
                 path="course-registeration"
                 element={<CourseRegistration />}
               />
-              <Route path="/attendance" element={<Attendance />} />
-              <Route path="/marks" element={<Marks />} />
+              <Route path="/attendance" element={<Attendance rollnumber={rollnumber}/>} />
+              <Route path="/marks" element={<Marks rollnumber={rollnumber}/>} />
               <Route path="/time-table" element={<TimeTable />} />
               <Route path="/" element={<Navigate to="/profile" />} />
             </Routes>

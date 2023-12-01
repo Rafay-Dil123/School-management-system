@@ -1,6 +1,6 @@
 // FeeGeneration.jsx
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './navbar';
 import { PDFViewer, PDFDownloadLink, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import '../stylefeegeneration.css';
@@ -49,9 +49,9 @@ const styles = StyleSheet.create({
           <Text style={styles.label}>{`Roll Number:`}</Text>
           <Text style={styles.value}>{studentData.rollNumber}</Text>
           <Text style={styles.label}>{`Program:`}</Text>
-          <Text style={styles.value}>{studentData.program}</Text>
+          <Text style={styles.value}>{studentData.department}</Text>
           <Text style={styles.label}>{`Courses:`}</Text>
-          <Text style={styles.value}>{studentData.courses.join(', ')}</Text>
+          {/* <Text style={styles.value}>{studentData.courses.join(', ')}</Text> */}
           <Text style={styles.label}>{`Total Fee:`}</Text>
           <Text style={styles.value}>{`$${studentData.fees}`}</Text>
         </View>
@@ -59,15 +59,28 @@ const styles = StyleSheet.create({
     </Document>
   );
 
-const FeeGeneration = () => {
-  const studentData = {
-    name: 'John Doe',
-    rollNumber: '123456',
-    program: 'Computer Science',
-    courses: ['Mathematics', 'Computer Science', 'Physics'],
-    fees:'10,000',
-    // Add more details as needed
-  };
+const FeeGeneration = ({rollnumber}) => {
+   let [studentData,setstudentData ]=useState([])
+  useEffect(()=>{
+      getstudentdata();
+  },[])
+
+  let getstudentdata=async ()=>{
+    let data=await fetch(`/api/studentsdata/${rollnumber}/`);
+    let d=await data.json();
+    setstudentData(d);
+  }
+
+
+
+  // const studentData = {
+  //   name: 'John Doe',
+  //   rollNumber: '123456',
+  //   program: 'Computer Science',
+  //   courses: ['Mathematics', 'Computer Science', 'Physics'],
+  //   fees:'10,000',
+  //   // Add more details as needed
+  // };
 
   return (
     <>
