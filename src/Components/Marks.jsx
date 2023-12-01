@@ -1,77 +1,59 @@
-
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../stylemarks.css';
 import Navbar from './navbar';
 
-function Marks() {
-  const marksData = [
+function Marks({ rollnumber }) {
+  const tests = ['test1', 'test2', 'finalExam'];
+  const [selectedTest, setSelectedTest] = useState('test1');
+  const [marksData, setMarksData] = useState({});
 
-    {
-        course: "English",
-        tests: [
-          { test: "Test 1", marks: 90 },
-          { test: "Test 2", marks: 85 },
-          { test: "Final Exam", marks: 92 },
-        ],
-      },
-      {
-        course: "Urdu",
-        tests: [
-          { test: "Test 1", marks: 90 },
-          { test: "Test 2", marks: 85 },
-          { test: "Final Exam", marks: 92 },
-        ],
-      },
-    {
-      course: "Mathematics",
-      tests: [
-        { test: "Test 1", marks: 90 },
-        { test: "Test 2", marks: 85 },
-        { test: "Final Exam", marks: 92 },
-      ],
-    },
-    {
-      course: "Computer Science",
-      tests: [
-        { test: "Test 1", marks: 80 },
-        { test: "Test 2", marks: 88 },
-        { test: "Final Exam", marks: 95 },
-      ],
-    },
+  useEffect(() => {
+    getMarksData();
+  }, [selectedTest]);
 
-    {
-        course: "Physics",
-        tests: [
-          { test: "Test 1", marks: 80 },
-          { test: "Test 2", marks: 88 },
-          { test: "Final Exam", marks: 95 },
-        ],
-      },
-    // Add more courses as needed
-  ];
+  const getMarksData = async () => {
+    try {
+      const data = await fetch(`/api/students2data/${rollnumber}/${selectedTest}`);
+      const resp = await data.json();
+      console.log('got data after test', resp);
+      setMarksData(resp[0] || {});
+    } catch (error) {
+      console.error('Error fetching marks data:', error);
+    }
+  };
+
+  const excludedKeys = ['id', 'testtype', 'rollno'];
 
   return (
     <>
-
-
       <div className="marks-container">
+        <label htmlFor="testSelect">Select Test:</label>
+        <select
+          id="testSelect"
+          value={selectedTest}
+          onChange={(e) => setSelectedTest(e.target.value)}
+        >
+          {tests.map((test, index) => (
+            <option key={index} value={test}>
+              {test}
+            </option>
+          ))}
+        </select>
         <table>
           <thead>
             <tr>
-              <th>Course</th>
-              {marksData[0]?.tests.map((test, index) => (
-                <th key={index}>{test.test}</th>
-              ))}
+              <th>Subject</th>
+              <th>Marks</th>
             </tr>
           </thead>
           <tbody>
-            {marksData.map((course, courseIndex) => (
-              <tr key={courseIndex}>
-                <td>{course.course}</td>
-                {course.tests.map((test, testIndex) => (
-                  <td>{test.marks}</td>
-                ))}
-              </tr>
+            {Object.entries(marksData).map(([key, value], index) => (
+              !excludedKeys.includes(key) && (
+                <tr key={index}>
+                  <td>{key}</td>
+                  <td>{value}</td>
+                </tr>
+              )
             ))}
           </tbody>
         </table>
